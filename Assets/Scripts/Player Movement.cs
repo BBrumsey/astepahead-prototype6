@@ -1,18 +1,27 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 public class Player_Movement : MonoBehaviour
 {
+    private Rigidbody rb;
+    private Vector2 moveInput;
+
     public float speed = 5;
-    CharacterController controller;
+   
+
+    void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
+    }
     void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        rb.linearVelocity = new Vector3(moveInput.x * speed, rb.linearVelocity.y, moveInput.y * speed);
     }
 }
