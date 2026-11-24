@@ -20,8 +20,17 @@ public class Player_Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+   void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(moveInput.x * speed, rb.linearVelocity.y, moveInput.y * speed);
+        if (rb.isKinematic)
+        {
+            return;
+        }
+
+        rb.linearVelocity = new Vector3(
+            moveInput.x * speed,
+            rb.linearVelocity.y,
+            moveInput.y * speed
+        );
     }
 }
